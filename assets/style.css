@@ -186,3 +186,107 @@ footer nav ul {
 	margin: 2em
 }
 
+/* Ajout */
+
+.filtres{
+	display: flex;
+    gap: 10px;
+    justify-content: center;
+    padding-bottom: 67px;
+}
+
+.filtre-tous {
+	width: auto;
+	padding-left: 20px;
+    padding-right: 20px;
+    height: 37px;
+    border-radius: 60px;
+    border: 1px solid #1D6154;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1D6154;
+    font-family: Syne;
+    font-size: 16px;
+}
+
+.filtre-objets {
+	width: auto;
+	padding-left: 20px;
+    padding-right: 20px;
+    height: 37px;
+    border-radius: 60px;
+    border: 1px solid #1D6154;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1D6154;
+    font-family: Syne;
+    font-size: 16px;
+}
+
+.filtre-appartements {
+	width: auto;
+	padding-left: 20px;
+    padding-right: 20px;
+    height: 37px;
+    border-radius: 60px;
+    border: 1px solid #1D6154;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1D6154;
+    font-family: Syne;
+    font-size: 16px;
+}
+
+.filtre-hotels {
+	width: auto;
+	padding-left: 20px;
+    padding-right: 20px;
+    height: 37px;
+    border-radius: 60px;
+    border: 1px solid #1D6154;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #1D6154;
+    font-family: Syne;
+    font-size: 16px;
+}
+
+.filtre-tous:hover{
+	font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    text-align: center;
+    border-radius: 60px;
+}
+
+.filtre-objets:hover{
+	font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    text-align: center;
+    border-radius: 60px;
+}
+
+.filtre-appartements:hover{
+	font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    text-align: center;
+    border-radius: 60px;
+}
+
+.filtre-hotels:hover{
+	font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    text-align: center;
+    border-radius: 60px;
+}

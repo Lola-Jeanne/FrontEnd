@@ -20,8 +20,13 @@ works.forEach(work => {
     figcaption.innerHTML = work.title
 });
 
+const filtreObjet = document.querySelector(".filtre-objets")
+filtreObjet.addEventListener("click", function(){
+    
+    const resultat = works.filter((work) => work.categoryId = 1 )
+})
 
-console.log(works)
+console.log(resultat)
 }
 
 travaux()
