@@ -1,7 +1,27 @@
-const works = fetch('http://localhost:5678/api/works')
+async function travaux() {
 
-const projets = document.querySelector("gallery")
+const reponse = await fetch('http://localhost:5678/api/works')
 
-projets.src = "http://localhost:5678/api/works"+works.title
+const works = await reponse.json()
 
-console.log(works.lenght)
+const projets = document.querySelector(".gallery")
+
+
+works.forEach(work => {
+    const figure = document.createElement("figure")
+    projets.appendChild(figure)
+
+    const img = document.createElement("img")
+    figure.appendChild(img)
+    img.src = work.imageUrl
+
+    const figcaption = document.createElement("figcaption")
+    figure.appendChild(figcaption)
+    figcaption.innerHTML = work.title
+});
+
+
+console.log(works)
+}
+
+travaux()
