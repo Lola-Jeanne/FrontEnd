@@ -295,3 +295,9 @@ footer nav ul {
 	text-decoration: underline;
     text-align: center;
 }
+
+footer{
+	display: flex;
+    justify-content: flex-end;
+    margin: 2em;
+}
