@@ -290,3 +290,8 @@ footer nav ul {
     text-align: center;
     border-radius: 60px;
 }
+
+.mot-de-passe{
+	text-decoration: underline;
+    text-align: center;
+}

@@ -27,11 +27,11 @@
                 <h2>Log In</h2>
                 <form action="#" method="post">
                     <label for="name">E-mail</label>
-                    <input type="text" name="name" id="name">
-                    <label for="email">Mot de passe</label>
                     <input type="email" name="email" id="email">
-                    <input type="submit" value="Se connecter">
-                    <p>Mot de passe oublié</p>
+                    <label for="email">Mot de passe</label>
+                    <input type="password" name="password" id="password">
+                    <input onclick="login()" type="submit" value="Se connecter">
+                    <a class="mot-de-passe">Mot de passe oublié</a>
                 </form>
             </section>
             <footer>
@@ -43,3 +43,13 @@
             </footer>
         </main>
     </body>
+
+
+    <!-- Test  -->
+    <script>
+        function login(){
+            const email =  document.getElementById("email").value
+
+            console.log(email)
+        }
+    </script>
