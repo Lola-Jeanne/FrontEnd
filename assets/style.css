@@ -235,8 +235,41 @@ footer nav ul {
     text-align: center;
 }
 
+.invisible{
+	visibility: hidden;
+}
+
 footer{
 	display: flex;
     justify-content: flex-end;
     margin: 2em;
+}
+
+.mode-edition {
+	margin: 0px;
+	width: 100%;
+    height: 59px;
+    background-color: black;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.txt-edition{
+	color: white;
+}
+
+.projet-modifier{
+	display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+#option-utilisateur{
+	display: none;
+}
+
+.visible{
+	display: block;
 }

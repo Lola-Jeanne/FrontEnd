@@ -30,3 +30,15 @@ async function login(){
     let result = await reponse.json();
 }
 
+function modeEdition(){
+    console.log("La fonction est ok")
+    document.querySelector("#option-utilisateur").classList.add("visible")
+}
+
+document.addEventListener("DOMContentLoaded", function(){ //permet de vérifier que tout le contenu de la page soit chargé avant la fonction
+    if(localStorage.getItem("token")){
+        modeEdition()
+    }
+})
+
+
