@@ -24,7 +24,7 @@ async function travaux() {
 
     afficheTravaux(works)
 
-    const filtreObjet = document.querySelector(".filtre-objets")
+    const filtreObjet = document.querySelector("#filtre-objets")
     filtreObjet.addEventListener("click", function(){
         
         const travauxFiltre = works.filter((work) => work.categoryId == 1 )
@@ -34,7 +34,7 @@ async function travaux() {
         console.log(travauxFiltre)
     })
     
-    const filtreAppartement = document.querySelector(".filtre-appartements")
+    const filtreAppartement = document.querySelector("#filtre-appartements")
     filtreAppartement.addEventListener("click", function(){
         
         const travauxFiltre = works.filter((work) => work.categoryId == 2 )
@@ -44,7 +44,7 @@ async function travaux() {
         console.log(travauxFiltre)
     })
 
-    const filtreHotel = document.querySelector(".filtre-hotels")
+    const filtreHotel = document.querySelector("#filtre-hotels")
     filtreHotel.addEventListener("click", function(){
         
         const travauxFiltre = works.filter((work) => work.categoryId == 3 )
@@ -54,7 +54,7 @@ async function travaux() {
         console.log(travauxFiltre)
     })
 
-    const filtreTous = document.querySelector(".filtre-tous")
+    const filtreTous = document.querySelector("#filtre-tous")
     filtreTous.addEventListener("click", function(){
         
         const travauxFiltre = works
@@ -64,6 +64,16 @@ async function travaux() {
         console.log(travauxFiltre)
     })
     
+// Bouton de filtres 
+
+document.querySelectorAll('.bouton-filtre').forEach( button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('.bouton-filtre').forEach(btn => {
+            btn.classList.remove('bouton-actif');
+        })
+        this.classList.add('bouton-actif');
+    })
+})
 
 }
 

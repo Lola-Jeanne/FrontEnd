@@ -95,7 +95,7 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+nav li:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -195,7 +195,7 @@ footer nav ul {
     padding-bottom: 67px;
 }
 
-.filtre-tous {
+.bouton-filtre{
 	width: auto;
 	padding-left: 20px;
     padding-right: 20px;
@@ -210,52 +210,7 @@ footer nav ul {
     font-size: 16px;
 }
 
-.filtre-objets {
-	width: auto;
-	padding-left: 20px;
-    padding-right: 20px;
-    height: 37px;
-    border-radius: 60px;
-    border: 1px solid #1D6154;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #1D6154;
-    font-family: Syne;
-    font-size: 16px;
-}
-
-.filtre-appartements {
-	width: auto;
-	padding-left: 20px;
-    padding-right: 20px;
-    height: 37px;
-    border-radius: 60px;
-    border: 1px solid #1D6154;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #1D6154;
-    font-family: Syne;
-    font-size: 16px;
-}
-
-.filtre-hotels {
-	width: auto;
-	padding-left: 20px;
-    padding-right: 20px;
-    height: 37px;
-    border-radius: 60px;
-    border: 1px solid #1D6154;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #1D6154;
-    font-family: Syne;
-    font-size: 16px;
-}
-
-.filtre-tous:hover{
+.bouton-actif{
 	font-family: 'Syne';
     font-weight: 700;
     color: white;
@@ -264,29 +219,13 @@ footer nav ul {
     border-radius: 60px;
 }
 
-.filtre-objets:hover{
+.bouton-login{
 	font-family: 'Syne';
     font-weight: 700;
     color: white;
     background-color: #1D6154;
-    text-align: center;
-    border-radius: 60px;
-}
-
-.filtre-appartements:hover{
-	font-family: 'Syne';
-    font-weight: 700;
-    color: white;
-    background-color: #1D6154;
-    text-align: center;
-    border-radius: 60px;
-}
-
-.filtre-hotels:hover{
-	font-family: 'Syne';
-    font-weight: 700;
-    color: white;
-    background-color: #1D6154;
+    margin: 2em auto;
+    width: 180px;
     text-align: center;
     border-radius: 60px;
 }

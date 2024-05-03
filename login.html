@@ -25,12 +25,13 @@
         <main>
             <section id="contact">
                 <h2>Log In</h2>
-                <form action="#" method="post">
+                <form action="#">
                     <label for="name">E-mail</label>
                     <input type="email" name="email" id="email">
                     <label for="email">Mot de passe</label>
                     <input type="password" name="password" id="password">
-                    <input onclick="login()" type="submit" value="Se connecter">
+                    <input class="bouton-login" onclick="login()" value="Se connecter">
+                    <p id="erreur"></p>
                     <a class="mot-de-passe">Mot de passe oublié</a>
                 </form>
             </section>
@@ -44,12 +45,3 @@
             </footer>
         </body>
 <script src="./assets/login.js"></script>
-
-    <!-- Test  -->
-    <!-- <script>
-        function login(){
-            const email =  document.getElementById("email").value
-
-            console.log(email)
-        }
-    </script> -->
