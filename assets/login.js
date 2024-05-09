@@ -32,7 +32,9 @@ async function login(){
 
 function modeEdition(){
     console.log("La fonction est ok")
-    document.querySelector("#option-utilisateur").classList.add("visible")
+    document.querySelectorAll(".mode-edition").forEach(Element => {
+        Element.classList.add("visible")
+    })
 }
 
 document.addEventListener("DOMContentLoaded", function(){ //permet de vérifier que tout le contenu de la page soit chargé avant la fonction
