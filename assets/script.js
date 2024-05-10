@@ -16,11 +16,15 @@ function afficheTravaux(listeTravaux){
     });
 }
 
+let globalWorks = []
+
 async function travaux() {
 
     const reponse = await fetch('http://localhost:5678/api/works')
 
     const works = await reponse.json()
+
+    globalWorks = works
 
     afficheTravaux(works)
 
@@ -55,13 +59,17 @@ async function travaux() {
     })
 
     const filtreTous = document.querySelector("#filtre-tous")
+    filtreTous.classList.add('bouton-actif')
     filtreTous.addEventListener("click", function(){
         
         const travauxFiltre = works
 
         afficheTravaux(travauxFiltre)
-
         console.log(travauxFiltre)
+        document.querySelectorAll('.bouton-filtre').forEach(btn => {
+            btn.classList.remove('bouton-actif')
+        })
+        this.classList.add('bouton-actif')
     })
     
 // Bouton de filtres 
@@ -82,6 +90,9 @@ travaux()
 function modeEdition(){
     console.log("La fonction est ok")
     document.querySelectorAll(".mode-edition").forEach(Element => {
+        Element.classList.remove("invisible")
+    })
+    document.querySelectorAll(".projet-modifier").forEach(Element => {
         Element.classList.remove("invisible")
     })
 

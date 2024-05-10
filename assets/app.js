@@ -60,13 +60,13 @@
 // })
 
 document.addEventListener('DOMContentLoaded', function(){
-    const openModalButtons = document.querySelectorAll('.txt-edition')
-    const closeModalButtons = document.querySelectorAll('.js-modal-close')
+    const openModal = document.querySelectorAll('.txt-edition')
+    // const closeModal = document.querySelectorAll('.btn-close')
 
     const modal = document.querySelector('#modal')
     const modalContent = modal.querySelector('.modal-content')
 
-    openModalButtons.forEach(button => {
+    openModal.forEach(button => {
         button.addEventListener('click', function(e){
             e.preventDefault()
             modal.style.display = 'flex'
@@ -75,14 +75,29 @@ document.addEventListener('DOMContentLoaded', function(){
         })
     })
 
-    closeModalButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault()
-            modal.style.display = 'none'
-            modal.setAttribute('aria-hidden', 'true')
-            modal.setAttribute('aria-modal')
-        })
-    })
+    const closeModal = function (e) {
+    if (modal === null ) return
+    e.preventDefault()
+    modal.style.display = "none"
+    modal.setAttribute('aria-hidden', 'true')
+    modal.removeAttribute('aria-modal')
+    modal.removeEventListener('click', closeModal)
+    modal.querySelector('..btn-close').removeEventListener('click', closeModal)
+    modal.querySelector('.btn-close').removeEventListener('click', stopPropagation)
+    modal = null
+}
+
+    // closeModal.forEach(button => {
+    //     button.addEventListener('click', function(e) {
+    //         e.preventDefault()
+    //         closeModal()
+    //         modal.style.display = 'none'
+    //         modal.setAttribute('aria-hidden', 'true')
+    //         modal.setAttribute('aria-modal')
+
+    //         afficheTravaux(globalWorks)
+    //     })
+    // })
 
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
