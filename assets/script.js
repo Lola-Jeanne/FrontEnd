@@ -78,3 +78,26 @@ document.querySelectorAll('.bouton-filtre').forEach( button => {
 }
 
 travaux()
+
+function modeEdition(){
+    console.log("La fonction est ok")
+    document.querySelectorAll(".mode-edition").forEach(Element => {
+        Element.classList.remove("invisible")
+    })
+
+    document.querySelector(".filtres").style.display= 'none'
+
+    const logoutLink = document.getElementById("logoutLink")
+    logoutLink.textContent = 'logout'
+    logoutLink.addEventListener('click', function (event) {
+        event.preventDefault()
+        localStorage.removeItem('token')
+        window.location.href = './index.html'
+    })
+}
+
+document.addEventListener("DOMContentLoaded", function(){ //permet de vérifier que tout le contenu de la page soit chargé avant la fonction
+    if(localStorage.getItem("token")){
+        modeEdition()
+    }
+})
