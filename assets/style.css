@@ -332,13 +332,6 @@ footer{
 	padding-top: 30px;
 }
 
-.btn-close .fa-solid {
-	font-size: 24px;
-    position: relative;
-    top: -60px;
-    left: 458px;
-}
-
 .btn-ajout-modal{
 	/* font-family: 'Syne';
     font-weight: 700;
@@ -352,3 +345,19 @@ footer{
 	align-items: center;
     justify-content: center;
 } 
+
+.modal-close{
+	position: absolute;
+	right: 270px;
+	/* à rajouter sur le bouton de login et le mode édition: */
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+	padding: 0px;
+}
+
+.modal-close-icone {
+	width: 20px;
+	height: 20px;
+}

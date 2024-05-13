@@ -61,7 +61,6 @@
 
 document.addEventListener('DOMContentLoaded', function(){
     const openModal = document.querySelectorAll('.txt-edition')
-    // const closeModal = document.querySelectorAll('.btn-close')
 
     const modal = document.querySelector('#modal')
     const modalContent = modal.querySelector('.modal-content')
@@ -74,31 +73,7 @@ document.addEventListener('DOMContentLoaded', function(){
             modal.setAttribute('aria-modal', 'true')
         })
     })
-
-    const closeModal = function (e) {
-    if (modal === null ) return
-    e.preventDefault()
-    modal.style.display = "none"
-    modal.setAttribute('aria-hidden', 'true')
-    modal.removeAttribute('aria-modal')
-    modal.removeEventListener('click', closeModal)
-    modal.querySelector('..btn-close').removeEventListener('click', closeModal)
-    modal.querySelector('.btn-close').removeEventListener('click', stopPropagation)
-    modal = null
-}
-
-    // closeModal.forEach(button => {
-    //     button.addEventListener('click', function(e) {
-    //         e.preventDefault()
-    //         closeModal()
-    //         modal.style.display = 'none'
-    //         modal.setAttribute('aria-hidden', 'true')
-    //         modal.setAttribute('aria-modal')
-
-    //         afficheTravaux(globalWorks)
-    //     })
-    // })
-
+    
     modal.addEventListener('click', function(e) {
         if (e.target === modal) {
             modal.style.display = 'none'
@@ -109,5 +84,17 @@ document.addEventListener('DOMContentLoaded', function(){
 
     modalContent.addEventListener('click', function(e) {
         e.stopPropagation()
+    })
+})
+
+// Pour fermer la modale
+document.addEventListener('DOMContentLoaded', function() {
+    const closeModal = document.querySelectorAll('#closeModalIcon')
+
+    closeModal.forEach(button =>{
+        button.addEventListener('click', function(e){
+            e.preventDefault()
+            modal.style.display= 'none'
+        })
     })
 })
