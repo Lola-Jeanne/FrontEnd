@@ -269,6 +269,7 @@ footer{
     display: flex;
     justify-content: center;
     gap: 11px;
+	cursor: pointer;
 }
 
 .projet-modifier{
@@ -319,8 +320,13 @@ footer{
 	background: white;
 	padding: 20px;
 	border-radius: 10px;
-	width: 50%;
-    height: 50%;
+	width: 630px;
+	height: 688px;
+	padding: 20px;
+	border-radius: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
 }
 
 .modal-txt{
@@ -344,6 +350,9 @@ footer{
 	display: flex;
 	align-items: center;
     justify-content: center;
+	cursor: pointer;
+	position: relative;
+    top: 300px;
 } 
 
 .modal-close{

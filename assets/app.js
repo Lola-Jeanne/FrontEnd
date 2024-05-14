@@ -59,6 +59,32 @@
 //     }
 // })
 
+function afficheTravauxModal(works) {
+    const modalContent = document.querySelector('#modal .modal-content')
+    modalContent.innerHTML = ""
+    works.forEach(work => {
+        const figure = document.createElement("figure")
+        modalContent.appendChild(figure)
+
+        const img = document.createElement("img")
+        figure.appendChild(img)
+        img.src = work.imageUrl
+        img.style.width = "80px"
+        img.style.height = "105px"
+    })
+
+}
+
+// Pour ouvrir la modale 
+
+function ouvrirModalAfficherTraveaux() {
+    const modal = document.querySelector('#modal')
+    modal.style.display = 'flex'
+    modal.setAttribute('aria-hidden', 'false')
+    modal.setAttribute('aria-modal', 'true')
+    afficheTravauxModal(globalWorks)
+}
+
 document.addEventListener('DOMContentLoaded', function(){
     const openModal = document.querySelectorAll('.txt-edition')
 
@@ -68,9 +94,10 @@ document.addEventListener('DOMContentLoaded', function(){
     openModal.forEach(button => {
         button.addEventListener('click', function(e){
             e.preventDefault()
-            modal.style.display = 'flex'
-            modal.setAttribute('aria-hidden', 'false')
-            modal.setAttribute('aria-modal', 'true')
+            ouvrirModalAfficherTraveaux()
+            // modal.style.display = 'flex'
+            // modal.setAttribute('aria-hidden', 'false')
+            // modal.setAttribute('aria-modal', 'true')
         })
     })
     
@@ -90,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function(){
 // Pour fermer la modale
 document.addEventListener('DOMContentLoaded', function() {
     const closeModal = document.querySelectorAll('#closeModalIcon')
+    const modal = document.querySelector('#modal')
 
     closeModal.forEach(button =>{
         button.addEventListener('click', function(e){
