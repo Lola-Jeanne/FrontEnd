@@ -320,13 +320,20 @@ footer{
 	background: white;
 	padding: 20px;
 	border-radius: 10px;
-	width: 630px;
-	height: 688px;
+	/* width: 630px;
+	height: 688px; */
+	width: auto;
+	height: auto;
 	padding: 20px;
 	border-radius: 10px;
 	display: flex;
 	flex-wrap: wrap;
 	gap: 5px;
+}
+
+.modal-content figure {
+	width: 80px;
+    height: 105px;
 }
 
 .modal-txt{
