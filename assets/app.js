@@ -65,12 +65,24 @@ function afficheTravauxModal(works) {
     works.forEach(work => {
         const figure = document.createElement("figure")
         modalContent.appendChild(figure)
+        // test logo
+        // modalContent.appendChild(figure)
 
         const img = document.createElement("img")
         figure.appendChild(img)
         img.src = work.imageUrl
         img.style.width = "80px"
         img.style.height = "105px"
+        img.setAttribute('data-id', work.id)
+        figure.appendChild(img)
+
+        // test logo 
+
+        const trashLogo = document.createElement("button")
+        trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+        trashLogo.classList.add('trashLogo')
+        trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
+        figure.appendChild(trashLogo)
     })
 
 }
@@ -126,3 +138,27 @@ document.addEventListener('DOMContentLoaded', function() {
         })
     })
 })
+
+async function callApi(endpoint, method, body) {
+    const Response = await fetch(endpoint, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: body ? JSON.stringify(body) : null
+    })
+    return Response.json()
+}
+
+// Pour supprimer une image 
+function supprimerImage(imageId, figureElement) {
+    callApi('http://localhost:5678/api/works/{id}', 'DELETE')
+    .then(Response => {
+        if (Response.success) {
+            figure.remove()
+            console.log('Image supprimée')
+        } else {
+            console.log('Erreur')
+        }
+    })
+}

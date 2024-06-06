@@ -320,10 +320,10 @@ footer{
 	background: white;
 	padding: 20px;
 	border-radius: 10px;
-	/* width: 630px;
-	height: 688px; */
-	width: auto;
-	height: auto;
+	width: 630px;
+	height: 688px;
+	/* width: auto;
+	height: auto; */
 	padding: 20px;
 	border-radius: 10px;
 	display: flex;
@@ -334,6 +334,9 @@ footer{
 .modal-content figure {
 	width: 80px;
     height: 105px;
+	margin-top: 70px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .modal-txt{
@@ -342,6 +345,9 @@ footer{
     font-size: 26px;
     font-weight: 400;
     line-height: normal;
+	position: relative;
+    bottom: 330px;
+    left: 410px;
 	padding-top: 30px;
 }
 
@@ -360,20 +366,44 @@ footer{
 	cursor: pointer;
 	position: relative;
     top: 300px;
+	border: none;
+	right: 450px;
 } 
 
 .modal-close{
 	position: absolute;
-	right: 270px;
+	right: 210px;
+	top: 110px;
 	/* à rajouter sur le bouton de login et le mode édition: */
     cursor: pointer;
     width: 30px;
     height: 30px;
     background-color: white;
 	padding: 0px;
+	border: none;
 }
 
 .modal-close-icone {
 	width: 20px;
 	height: 20px;
+}
+
+.fa-trash-can{
+	color: white;
+    font-size: 15px;
+}
+
+.trashLogo {
+	background: black;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	position: relative;
+    bottom: 100px;
+    left: 50px;
+	border: none;
+	cursor: pointer;
 }
