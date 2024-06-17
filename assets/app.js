@@ -59,6 +59,7 @@
 //     }
 // })
 
+
 function afficheTravauxModal(works) {
     const modalContent = document.querySelector('#modal .modal-content')
     modalContent.innerHTML = ""
@@ -69,7 +70,7 @@ function afficheTravauxModal(works) {
         // modalContent.appendChild(figure)
 
         const img = document.createElement("img")
-        figure.appendChild(img)
+        // figure.appendChild(img)
         img.src = work.imageUrl
         img.style.width = "80px"
         img.style.height = "105px"
@@ -91,6 +92,9 @@ function afficheTravauxModal(works) {
 
 function ouvrirModalAfficherTraveaux() {
     const modal = document.querySelector('#modal')
+    // const modalContent = document.querySelector('.modal-content')
+    // const ajouterPhoto = document.getElementById('ajouterPhoto')
+
     modal.style.display = 'flex'
     modal.setAttribute('aria-hidden', 'false')
     modal.setAttribute('aria-modal', 'true')
@@ -102,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
     const modal = document.querySelector('#modal')
     const modalContent = modal.querySelector('.modal-content')
+    const ajouterPhoto = document.getElementById('ajouterPhoto')
 
     openModal.forEach(button => {
         button.addEventListener('click', function(e){
@@ -124,12 +129,83 @@ document.addEventListener('DOMContentLoaded', function(){
     modalContent.addEventListener('click', function(e) {
         e.stopPropagation()
     })
-})
+
+    // Test ajout photo
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const formAjoutPhoto = document.querySelector('.form-ajout-photo')
+        const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
+
+        // Pour ouvrir le formulaire d'ajout
+        function ajouterPhoto () {
+            if (btnAjoutPhoto) {
+                btnAjoutPhoto.addEventListener('click', function () {
+                    modalContent.style.display = 'none'
+                    formAjoutPhoto.style.display = 'block'
+                })
+            }
+        }
+        // Envoyer le formulaire
+        if (formAjoutPhoto) {
+            formAjoutPhoto.addEventListener('submit', function (e) {
+                e.preventDefault()
+
+                const titre = document.querySelector('#titre').value 
+                const image = document.querySelector('#image').files[0]
+
+                if (!titre || !image) {
+                    console.log("Titre ou image manquant")
+                    return
+                }
+
+                const formData = new FormData ()
+                formData.append('titre', titre)
+                formData.append('image', image)
+
+                callApi(`http://localhost:5678/api/works`, 'POST', formData)
+                .then(Response => {
+                    if (Response.ok) {
+                        console.log("Photo ajoutée")
+                        formAjoutPhoto.reset()
+                        formAjoutPhoto.style.display= 'none'
+                        modalContent.style.display= 'block'
+
+                        ouvrirModalAfficherTraveaux()
+                    } else {
+                        console.log("Erreur, impossible d'ajouter la photo")
+                    }
+                })
+                .catch(error => {
+                    console.log("Erreur: ", error)
+                })
+            })
+        }
+    })
+
+//     formAjoutPhoto.addEventListener('submit', function(e) {
+//         function ajouterPhoto() {
+//             const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
+    
+            
+//             ajouterPhoto.addEventListener('click', function() {
+//             modalContent.style.display = 'none' //Pour cacher les images 
+//             formAjoutPhoto.style.display= 'block' //Pour afficher le formulaire
+//         })
+//         e.preventDefault()
+//         callApi(`http://localhost:5678/api/works`, 'POST')
+
+//         const titre = document.querySelector('#titre').value 
+//         const image = document.querySelector('#image').files[0]
+//         console.log("Titre:", titre)
+//         console.log("Image:", image)
+//     })
+// })
 
 // Pour fermer la modale
 document.addEventListener('DOMContentLoaded', function() {
     const closeModal = document.querySelectorAll('#closeModalIcon')
     const modal = document.querySelector('#modal')
+    const modalContent = document.querySelector('#modalContent')
 
     closeModal.forEach(button =>{
         button.addEventListener('click', function(e){
@@ -137,28 +213,101 @@ document.addEventListener('DOMContentLoaded', function() {
             modal.style.display= 'none'
         })
     })
+
+    const ajouterPhoto = document.querySelector('.btn-ajouter-modal')
+    ajouterPhoto.addEventListener('click', function(e) {
+        e.preventDefault()
+        modalContent.style.display = 'none'
+        ajouterPhoto.style.display='block'
+    })
 })
 
 async function callApi(endpoint, method, body) {
     const Response = await fetch(endpoint, {
         method: method,
         headers: {
-            'Content-Type': 'application/json'
-        },
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
         body: body ? JSON.stringify(body) : null
     })
-    return Response.json()
+    // const data = await Response.json()
+    return Response
 }
 
 // Pour supprimer une image 
-function supprimerImage(imageId, figureElement) {
-    callApi('http://localhost:5678/api/works/{id}', 'DELETE')
-    .then(Response => {
-        if (Response.success) {
-            figure.remove()
+ async function supprimerImage(imageId, figureElement) {
+    const Response = await callApi(`http://localhost:5678/api/works/${imageId}`, 'DELETE')
+    console.log(Response)
+        if (Response.status == 204) {
+            
+            // supprimer l'image de la galerie
+            const galleryPhoto = document.querySelector(`.gallery img[dataId='${imageId}']`)
+            if (galleryPhoto) {
+                galleryPhoto.closest('figure').remove()
+            }
+            
+            // surpprimer l'image de la modale
+            figureElement.remove()
             console.log('Image supprimée')
         } else {
-            console.log('Erreur')
+            console.log('Erreur lors de la suppression de l/image')
         }
-    })
-}
+    }
+
+
+
+
+// Pour la preview 
+// const imageInput = document.querySelector("#ajouter-img");
+
+// imageInput.addEventListener("change", () => {
+// const reader = new FileReader();
+
+// reader.addEventListener("load", () => {
+//   document.querySelector(".div-img").style.backgroundImage = `url(${reader.result})`;
+// });
+
+// reader.readAsDataURL(imageInput.files[0]);
+// });
+
+// form.addEventListener("submit", async function (e) {
+//     e.preventDefault();
+  
+//     //On les stock dans d'autre variable pour cibler la valeur saisie par l'utilisateur ou le fichier chargé
+//     const ajoutImage = imageElement.files[0];
+//     const ajoutTitle = titleElement.value;
+//     const ajoutCategory = categoryElement.value;
+  
+//     if (!ajoutImage || !ajoutTitle || !ajoutCategory) {
+//       return (msgErreur.style.visibility = "visible");
+//     } else {
+//       msgErreur.style.visibility = "hidden";
+//     }
+  
+//     // Vérifier la taille de l'image
+//   if (ajoutImage.size > 4 * 1024 * 1024) {
+//     alert("La taille de l'image ne doit pas dépasser 4 Mo, saisissez une nouvelle image.");
+//     return;
+//   }
+  
+//   const formData = new FormData(form);
+//   console.log(formData);
+  
+//   const response = await fetch("http://localhost:5678/api/works", {
+//     method: "POST",
+//     headers: {
+//       Accept: "application/json",
+//       Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+//     },
+//     body: formData,
+//   });
+//   const data = await response.json();
+//   if (response.status === 201) {
+//     listeTravaux.push(data);
+//     afficheWorksMini();  // Mettez à jour la liste de travaux dans la modale
+  
+    // Réinitialisez le formulaire pour un nouvel ajout
+//     form.reset();
+//     document.querySelector(".div-img").style.backgroundImage = "";
+//   }
+// });

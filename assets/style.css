@@ -228,6 +228,7 @@ footer nav ul {
     width: 180px;
     text-align: center;
     border-radius: 60px;
+	cursor: pointer;
 }
 
 .mot-de-passe{
@@ -364,15 +365,15 @@ footer{
 	align-items: center;
     justify-content: center;
 	cursor: pointer;
-	position: relative;
+	position: fixed;
     top: 300px;
 	border: none;
 	right: 450px;
 } 
 
 .modal-close{
-	position: absolute;
-	right: 210px;
+	position: fixed;
+	right: 270px;
 	top: 110px;
 	/* à rajouter sur le bouton de login et le mode édition: */
     cursor: pointer;
