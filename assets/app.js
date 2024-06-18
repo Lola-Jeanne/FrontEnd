@@ -1,261 +1,3 @@
-// let modal = null
-// const focusableSelector = 'button, a, input, textarea'
-// let focusbales = []
-
-// // Ouverture de la modale 
-
-// const openModal = function (e) {
-//     e.preventDefault()
-//     // modal = document.querySelector(e.target.getAttribute('href'))
-//     modal = document.querySelector(e.target.getAttribute('.txt-edition'))
-//     focusbales = Array.from(modal.querySelectorAll(focusableSelector))
-//     modal.style.display = null
-//     modal.removeAttribute('aria-hidden')
-//     modal.setAttribute('aria-modal', 'true')
-//     modal.addEventListener('click', closeModal)
-//     modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
-//     modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
-// }
-
-// // Fermeture de la modale
-
-// const closeModal = function (e) {
-//     if (modal === null ) return
-//     e.preventDefault()
-//     modal.style.display = "none"
-//     modal.setAttribute('aria-hidden', 'true')
-//     modal.removeAttribute('aria-modal')
-//     modal.removeEventListener('click', closeModal)
-//     modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
-//     modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
-//     modal = null
-// }
-
-// const stopPropagation = function (e) {
-//     e.stopPropagation()
-// }
-
-// // Pour focuser que les éléments dans la modale (c'est un peu compliqué son histoire)
-// const focusInModal = function (e){
-//     e.preventDefault()
-//     let index = focusbales.findIndex(f => f === modal.querySelector(':focus'))
-//     index ++
-//     if (index >= focusbales.length) {
-//         index = 0
-//     }
-//     focusbales [index].focus()
-// }
-
-// document.querySelectorAll('.js-modal').forEach( a=> {
-//     a.addEventListener('click', openModal)
-// })
-
-// window.addEventListener('keydown', function(e) {
-//     if (e.key === "Escape" || e.key === "Esc") {
-//         closeModal(e)
-//     }
-//     if (e.key === "Tab" && modal !== null){
-//         focusInModal(e)
-//     }
-// })
-
-
-function afficheTravauxModal(works) {
-    const modalContent = document.querySelector('#modal .modal-content')
-    modalContent.innerHTML = ""
-    works.forEach(work => {
-        const figure = document.createElement("figure")
-        modalContent.appendChild(figure)
-        // test logo
-        // modalContent.appendChild(figure)
-
-        const img = document.createElement("img")
-        // figure.appendChild(img)
-        img.src = work.imageUrl
-        img.style.width = "80px"
-        img.style.height = "105px"
-        img.setAttribute('data-id', work.id)
-        figure.appendChild(img)
-
-        // test logo 
-
-        const trashLogo = document.createElement("button")
-        trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
-        trashLogo.classList.add('trashLogo')
-        trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
-        figure.appendChild(trashLogo)
-    })
-
-}
-
-// Pour ouvrir la modale 
-
-function ouvrirModalAfficherTraveaux() {
-    const modal = document.querySelector('#modal')
-    // const modalContent = document.querySelector('.modal-content')
-    // const ajouterPhoto = document.getElementById('ajouterPhoto')
-
-    modal.style.display = 'flex'
-    modal.setAttribute('aria-hidden', 'false')
-    modal.setAttribute('aria-modal', 'true')
-    afficheTravauxModal(globalWorks)
-}
-
-document.addEventListener('DOMContentLoaded', function(){
-    const openModal = document.querySelectorAll('.txt-edition')
-
-    const modal = document.querySelector('#modal')
-    const modalContent = modal.querySelector('.modal-content')
-    const ajouterPhoto = document.getElementById('ajouterPhoto')
-
-    openModal.forEach(button => {
-        button.addEventListener('click', function(e){
-            e.preventDefault()
-            ouvrirModalAfficherTraveaux()
-            // modal.style.display = 'flex'
-            // modal.setAttribute('aria-hidden', 'false')
-            // modal.setAttribute('aria-modal', 'true')
-        })
-    })
-    
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.style.display = 'none'
-            modal.setAttribute('aria-hidden', 'true')
-            modal.setAttribute('aria-modal')
-        }
-    })
-
-    modalContent.addEventListener('click', function(e) {
-        e.stopPropagation()
-    })
-
-    // Test ajout photo
-
-    document.addEventListener('DOMContentLoaded', function() {
-        const formAjoutPhoto = document.querySelector('.form-ajout-photo')
-        const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
-
-        // Pour ouvrir le formulaire d'ajout
-        function ajouterPhoto () {
-            if (btnAjoutPhoto) {
-                btnAjoutPhoto.addEventListener('click', function () {
-                    modalContent.style.display = 'none'
-                    formAjoutPhoto.style.display = 'block'
-                })
-            }
-        }
-        // Envoyer le formulaire
-        if (formAjoutPhoto) {
-            formAjoutPhoto.addEventListener('submit', function (e) {
-                e.preventDefault()
-
-                const titre = document.querySelector('#titre').value 
-                const image = document.querySelector('#image').files[0]
-
-                if (!titre || !image) {
-                    console.log("Titre ou image manquant")
-                    return
-                }
-
-                const formData = new FormData ()
-                formData.append('titre', titre)
-                formData.append('image', image)
-
-                callApi(`http://localhost:5678/api/works`, 'POST', formData)
-                .then(Response => {
-                    if (Response.ok) {
-                        console.log("Photo ajoutée")
-                        formAjoutPhoto.reset()
-                        formAjoutPhoto.style.display= 'none'
-                        modalContent.style.display= 'block'
-
-                        ouvrirModalAfficherTraveaux()
-                    } else {
-                        console.log("Erreur, impossible d'ajouter la photo")
-                    }
-                })
-                .catch(error => {
-                    console.log("Erreur: ", error)
-                })
-            })
-        }
-    })
-
-//     formAjoutPhoto.addEventListener('submit', function(e) {
-//         function ajouterPhoto() {
-//             const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
-    
-            
-//             ajouterPhoto.addEventListener('click', function() {
-//             modalContent.style.display = 'none' //Pour cacher les images 
-//             formAjoutPhoto.style.display= 'block' //Pour afficher le formulaire
-//         })
-//         e.preventDefault()
-//         callApi(`http://localhost:5678/api/works`, 'POST')
-
-//         const titre = document.querySelector('#titre').value 
-//         const image = document.querySelector('#image').files[0]
-//         console.log("Titre:", titre)
-//         console.log("Image:", image)
-//     })
-// })
-
-// Pour fermer la modale
-document.addEventListener('DOMContentLoaded', function() {
-    const closeModal = document.querySelectorAll('#closeModalIcon')
-    const modal = document.querySelector('#modal')
-    const modalContent = document.querySelector('#modalContent')
-
-    closeModal.forEach(button =>{
-        button.addEventListener('click', function(e){
-            e.preventDefault()
-            modal.style.display= 'none'
-        })
-    })
-
-    const ajouterPhoto = document.querySelector('.btn-ajouter-modal')
-    ajouterPhoto.addEventListener('click', function(e) {
-        e.preventDefault()
-        modalContent.style.display = 'none'
-        ajouterPhoto.style.display='block'
-    })
-})
-
-async function callApi(endpoint, method, body) {
-    const Response = await fetch(endpoint, {
-        method: method,
-        headers: {
-            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-          },
-        body: body ? JSON.stringify(body) : null
-    })
-    // const data = await Response.json()
-    return Response
-}
-
-// Pour supprimer une image 
- async function supprimerImage(imageId, figureElement) {
-    const Response = await callApi(`http://localhost:5678/api/works/${imageId}`, 'DELETE')
-    console.log(Response)
-        if (Response.status == 204) {
-            
-            // supprimer l'image de la galerie
-            const galleryPhoto = document.querySelector(`.gallery img[dataId='${imageId}']`)
-            if (galleryPhoto) {
-                galleryPhoto.closest('figure').remove()
-            }
-            
-            // surpprimer l'image de la modale
-            figureElement.remove()
-            console.log('Image supprimée')
-        } else {
-            console.log('Erreur lors de la suppression de l/image')
-        }
-    }
-
-
-
 
 // Pour la preview 
 // const imageInput = document.querySelector("#ajouter-img");
@@ -311,3 +53,175 @@ async function callApi(endpoint, method, body) {
 //     document.querySelector(".div-img").style.backgroundImage = "";
 //   }
 // });
+
+// Optimisation de code
+
+document.addEventListener('DOMContentLoaded', function (){
+    const modal = document.querySelector('#modal')
+    const modalContent = modal.querySelector ('.modal-content')
+    const ajouterPhotoBtn =document.querySelector('.btn-ajouter-modal')
+    const formAjoutPhoto = document.querySelector('.form-ajouter-photo')
+    const openModal = document.querySelectorAll('.txt-edition')
+    const closeModal = document.querySelectorAll('#closeModalIcone')
+
+   // Pour ouvrir la modale 
+
+function ouvrirModalAfficherTraveaux() {
+    const modal = document.querySelector('#modal')
+    // const modalContent = document.querySelector('.modal-content')
+    // const ajouterPhoto = document.getElementById('ajouterPhoto')
+
+    modal.style.display = 'flex'
+    modal.setAttribute('aria-hidden', 'false')
+    modal.setAttribute('aria-modal', 'true')
+    afficheTravauxModal(globalWorks)
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+    const openModal = document.querySelectorAll('.txt-edition')
+
+    const modal = document.querySelector('#modal')
+    const modalContent = modal.querySelector('.modal-content')
+    const ajouterPhoto = document.getElementById('ajouterPhoto')
+
+    openModal.forEach(button => {
+        button.addEventListener('click', function(e){
+            e.preventDefault()
+            ouvrirModalAfficherTraveaux()
+            // modal.style.display = 'flex'
+            // modal.setAttribute('aria-hidden', 'false')
+            // modal.setAttribute('aria-modal', 'true')
+        })
+    })
+    
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none'
+            modal.setAttribute('aria-hidden', 'true')
+            modal.setAttribute('aria-modal')
+        }
+    })
+
+    modalContent.addEventListener('click', function(e) {
+        e.stopPropagation()
+    })
+
+    closeModal.forEach(button => {
+        button.addEventListener('click', function (e) {
+            e.preventDefault()
+            fermerModal()
+            
+        })
+    })
+    modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+            fermerModal()
+        }
+    })
+
+    modalContent.addEventListener('click', function (e) {
+        e.stopPropagation()
+    })
+    if (ajouterPhotoBtn) {
+        ajouterPhotoBtn.addEventListener('click', function() {
+            modalContent.style.display = 'none'
+            formAjoutPhoto.style.display = 'block'
+        })
+    }
+    if (formAjoutPhoto) {
+        formAjoutPhoto.addEventListener('submit', function (e) {
+            e.preventDefault()
+
+            const titre = document.querySelector('#titre').value
+            const image = document.querySelector('#image').files[0]
+
+            if (!titre || !image) {
+                console.log ("Titre ou image manquant")
+                return
+            }
+
+            const formData = new FormData()
+            formData.append('titre', titre)
+            formData.append('image', image)
+
+            callApi(`http://localhost:5678/api/works`, 'POST', formData)
+            .then(response => {
+                if(response.ok) {
+                    console.log("Photo ajoutée")
+                    formAjoutPhoto.reset()
+                    formAjoutPhoto.style.display = 'none'
+                    modalContent.style.display = 'block'
+
+                    ouvrirModalAfficherTraveaux()
+                } else {
+                    console.log("Erreur")
+                }
+            })
+            .catch(error => {
+                console.log("Erreur: ", error)
+            })
+        })
+    }
+})
+
+function afficheTravauxModal (works) {
+    const modalContent = document.querySelector('#modal .modal-content')
+    modalContent.innerHTML = ""
+
+    works.forEach(work => {
+        const figure = document.createElement("figure")
+        const img = document.createElement("img")
+        const trashLogo = document.createElement("button")
+
+        img.src = work.imageUrl
+        img.style.width = "80px"
+        img.setAttribute('data-id', work.id)
+
+        trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+        trashLogo.classList.add('trashLogo')
+        trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
+
+        figure.appendChild(img)
+        figure.appendChild(trashLogo)
+        modalContent.appendChild(figure)
+    })
+    function ouvrirModalAfficherTraveaux() {
+        const modal = document.querySelector('#modal')
+        modal.style.display ='flex'
+        modal.setAttribute('aria-hidden', 'false')
+        modal.setAttribute('aria-modal', 'true')
+        afficheTravauxModal(globalWorks)
+
+        function closeModal() {
+            const modal = document.querySelector('#modal');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        async function callApi(endpoint, method, body) {
+            const Response = await fetch(endpoint, {
+                method: method,
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+                  },
+                body: body ? JSON.stringify(body) : null
+            })
+            // const data = await Response.json()
+            return Response
+        }
+        async function supprimerImage(imageId, figureElement) {
+            const response = await callApi(`http://localhost:5678/api/works/${imageId}`, 'DELETE');
+            if (response.status == 204) {
+                const galleryPhoto = document.querySelector(`.gallery img[data-id='${imageId}']`);
+                if (galleryPhoto) {
+                    galleryPhoto.closest('figure').remove();
+                }
+                figureElement.remove();
+                console.log('Image supprimée');
+            } else {
+                console.log('Erreur lors de la suppression de l\'image');
+            }
+        }
+    }
+}
+})
