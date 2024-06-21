@@ -56,15 +56,36 @@
 
 // Optimisation de code
 
-document.addEventListener('DOMContentLoaded', function (){
-    const modal = document.querySelector('#modal')
-    const modalContent = modal.querySelector ('.modal-content')
-    const ajouterPhotoBtn =document.querySelector('.btn-ajouter-modal')
-    const formAjoutPhoto = document.querySelector('.form-ajouter-photo')
-    const openModal = document.querySelectorAll('.txt-edition')
-    const closeModal = document.querySelectorAll('#closeModalIcone')
+const modalContent = document.querySelector('#modal .modal-content')
 
-   // Pour ouvrir la modale 
+function afficheTravauxModal(works) {
+    modalContent.innerHTML = ""
+    works.forEach(work => {
+        const figure = document.createElement("figure")
+        modalContent.appendChild(figure)
+        // test logo
+        // modalContent.appendChild(figure)
+
+        const img = document.createElement("img")
+        // figure.appendChild(img)
+        img.src = work.imageUrl
+        img.style.width = "80px"
+        img.style.height = "105px"
+        img.setAttribute('data-id', work.id)
+        figure.appendChild(img)
+
+        // test logo 
+
+        const trashLogo = document.createElement("button")
+        trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+        trashLogo.classList.add('trashLogo')
+        trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
+        figure.appendChild(trashLogo)
+    })
+
+}
+
+// Pour ouvrir la modale 
 
 function ouvrirModalAfficherTraveaux() {
     const modal = document.querySelector('#modal')
@@ -98,7 +119,7 @@ document.addEventListener('DOMContentLoaded', function(){
         if (e.target === modal) {
             modal.style.display = 'none'
             modal.setAttribute('aria-hidden', 'true')
-            modal.setAttribute('aria-modal')
+            modal.setAttribute('aria-modal', 'true')
         }
     })
 
@@ -106,122 +127,127 @@ document.addEventListener('DOMContentLoaded', function(){
         e.stopPropagation()
     })
 
-    closeModal.forEach(button => {
-        button.addEventListener('click', function (e) {
-            e.preventDefault()
-            fermerModal()
-            
-        })
-    })
-    modal.addEventListener('click', function (e) {
-        if (e.target === modal) {
-            fermerModal()
-        }
-    })
+    // Test ajout photo
 
-    modalContent.addEventListener('click', function (e) {
-        e.stopPropagation()
-    })
-    if (ajouterPhotoBtn) {
-        ajouterPhotoBtn.addEventListener('click', function() {
+    
+        const formAjoutPhoto = document.querySelector('#modal2')
+        const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
+
+        
+        btnAjoutPhoto.addEventListener('click', function () {
             modalContent.style.display = 'none'
-            formAjoutPhoto.style.display = 'block'
+            formAjoutPhoto.style.display = 'flex'
         })
-    }
-    if (formAjoutPhoto) {
-        formAjoutPhoto.addEventListener('submit', function (e) {
+
+        const btnSubmit = document.querySelector('#AjoutPhotoSubmit')
+
+
+        // Envoyer le formulaire
+        btnSubmit.addEventListener('submit', function (e) {
             e.preventDefault()
 
-            const titre = document.querySelector('#titre').value
-            const image = document.querySelector('#image').files[0]
+                const titre = document.querySelector('#titre').value 
+                const image = document.querySelector('#image').files[0]
+                const categorie = document.querySelector('#categorie').value
 
-            if (!titre || !image) {
-                console.log ("Titre ou image manquant")
-                return
-            }
-
-            const formData = new FormData()
-            formData.append('titre', titre)
-            formData.append('image', image)
-
-            callApi(`http://localhost:5678/api/works`, 'POST', formData)
-            .then(response => {
-                if(response.ok) {
-                    console.log("Photo ajoutée")
-                    formAjoutPhoto.reset()
-                    formAjoutPhoto.style.display = 'none'
-                    modalContent.style.display = 'block'
-
-                    ouvrirModalAfficherTraveaux()
-                } else {
-                    console.log("Erreur")
+                if (!titre || !image) {
+                    console.log("Titre ou image manquant")
+                    return
                 }
+
+                const formData = new FormData ()
+                formData.append('titre', titre)
+                formData.append('image', image)
+
+                callApi(`http://localhost:5678/api/works`, 'POST', formData)
+                .then(Response => {
+                    if (Response.ok) {
+                        console.log("Photo ajoutée")
+                        formAjoutPhoto.reset()
+                        formAjoutPhoto.style.display= 'none'
+                        modalContent.style.display= 'block'
+
+                        ouvrirModalAfficherTraveaux()
+                    } else {
+                        console.log("Erreur, impossible d'ajouter la photo")
+                    }
+                })
+                .catch(error => {
+                    console.log("Erreur: ", error)
+                })
             })
-            .catch(error => {
-                console.log("Erreur: ", error)
-            })
+
+//     formAjoutPhoto.addEventListener('submit', function(e) {
+//         function ajouterPhoto() {
+//             const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
+    
+            
+//             ajouterPhoto.addEventListener('click', function() {
+//             modalContent.style.display = 'none' //Pour cacher les images 
+//             formAjoutPhoto.style.display= 'block' //Pour afficher le formulaire
+//         })
+//         e.preventDefault()
+//         callApi(`http://localhost:5678/api/works`, 'POST')
+
+//         const titre = document.querySelector('#titre').value 
+//         const image = document.querySelector('#image').files[0]
+//         console.log("Titre:", titre)
+//         console.log("Image:", image)
+//     })
+// })
+
+// Pour fermer la modale
+document.addEventListener('DOMContentLoaded', function() {
+    const closeModal = document.querySelectorAll('#closeModalIcon')
+    const modal = document.querySelector('#modal')
+    const modalContent = document.querySelector('#modalContent')
+
+    closeModal.forEach(button =>{
+        button.addEventListener('click', function(e){
+            e.preventDefault()
+            modal.style.display= 'none'
         })
-    }
-})
-
-function afficheTravauxModal (works) {
-    const modalContent = document.querySelector('#modal .modal-content')
-    modalContent.innerHTML = ""
-
-    works.forEach(work => {
-        const figure = document.createElement("figure")
-        const img = document.createElement("img")
-        const trashLogo = document.createElement("button")
-
-        img.src = work.imageUrl
-        img.style.width = "80px"
-        img.setAttribute('data-id', work.id)
-
-        trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
-        trashLogo.classList.add('trashLogo')
-        trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
-
-        figure.appendChild(img)
-        figure.appendChild(trashLogo)
-        modalContent.appendChild(figure)
     })
-    function ouvrirModalAfficherTraveaux() {
-        const modal = document.querySelector('#modal')
-        modal.style.display ='flex'
-        modal.setAttribute('aria-hidden', 'false')
-        modal.setAttribute('aria-modal', 'true')
-        afficheTravauxModal(globalWorks)
 
-        function closeModal() {
-            const modal = document.querySelector('#modal');
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
-        }
+    const ajouterPhoto = document.querySelector('.btn-ajouter-modal')
+    ajouterPhoto.addEventListener('click', function(e) {
+        e.preventDefault()
+        modalContent.style.display = 'none'
+        ajouterPhoto.style.display='block'
+    })
+})
 
-        async function callApi(endpoint, method, body) {
-            const Response = await fetch(endpoint, {
-                method: method,
-                headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-                  },
-                body: body ? JSON.stringify(body) : null
-            })
-            // const data = await Response.json()
-            return Response
-        }
-        async function supprimerImage(imageId, figureElement) {
-            const response = await callApi(`http://localhost:5678/api/works/${imageId}`, 'DELETE');
-            if (response.status == 204) {
-                const galleryPhoto = document.querySelector(`.gallery img[data-id='${imageId}']`);
-                if (galleryPhoto) {
-                    galleryPhoto.closest('figure').remove();
-                }
-                figureElement.remove();
-                console.log('Image supprimée');
-            } else {
-                console.log('Erreur lors de la suppression de l\'image');
+async function callApi(endpoint, method, body) {
+    const Response = await fetch(endpoint, {
+        method: method,
+        headers: {
+            Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+          },
+        body: body ? JSON.stringify(body) : null
+    })
+    // const data = await Response.json()
+    return Response
+}
+
+
+})
+
+// Pour supprimer une image 
+ async function supprimerImage(imageId, figureElement) {
+    const Response = await callApi(`http://localhost:5678/api/works/${imageId}`, 'DELETE')
+    console.log(Response)
+        if (Response.status == 204) {
+            
+            // supprimer l'image de la galerie
+            const galleryPhoto = document.querySelector(`.gallery img[dataId='${imageId}']`)
+            if (galleryPhoto) {
+                galleryPhoto.closest('figure').remove()
             }
+            
+            // surpprimer l'image de la modale
+            figureElement.remove()
+            console.log('Image supprimée')
+        } else {
+            console.log('Erreur lors de la suppression de l/image')
         }
     }
-}
-})

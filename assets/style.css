@@ -408,3 +408,71 @@ footer{
 	border: none;
 	cursor: pointer;
 }
+
+.formulaire-photo {
+	align-self: center;
+    display: inline-grid;
+}
+
+.input-txt {
+	width: 420px;
+    height: 51px;
+	margin-bottom: 30px;
+	margin-top: 10px;
+	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+	border: none;
+}
+
+.liste-categ {
+	border: none;
+    box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+    width: 630px;
+    height: 50px;
+    margin-top: 10px;
+    margin-bottom: 100px;
+}
+.btn-photo {
+	font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #1D6154;
+    margin: 2em auto;
+    text-align: center;
+    border-radius: 60px;
+    border: none;
+    width: 237px;
+    height: 36px;
+	cursor: pointer;
+}
+
+.fond-bleu {
+	background-color: #E8F1F6;
+    width: 420px;
+    height: 169px;
+    border-radius: 3px;
+    align-content: center;
+    justify-self: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.fa-image{
+	font-size: 100px;
+	color: #b9c6cc;
+	position: relative;
+    left: 140px;
+    bottom: 15px;
+}
+
+.btn-ajout-photo {
+	width: 173px;
+    height: 36px;
+    border-radius: 50px;
+    background: #CBD6DC;
+    color: #306685;
+    text-align: center;
+    font-family: "Work Sans";
+    font-size: 14px;
+	position: relative;
+    top: 28px;
+}
