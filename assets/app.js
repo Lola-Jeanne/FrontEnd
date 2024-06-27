@@ -82,9 +82,29 @@ function afficheTravauxModal(works) {
         trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
         figure.appendChild(trashLogo)
     })
-
 }
 
+
+// Pour fermer la modale
+document.addEventListener('DOMContentLoaded', function() {
+    const closeModal = document.querySelectorAll('#closeModalIcon')
+    const modal = document.querySelector('#modal')
+    const modalContent = document.querySelector('#modalContent')
+
+    closeModal.forEach(button =>{
+        button.addEventListener('click', function(e){
+            e.preventDefault()
+            modal.style.display= 'none'
+        })
+    })
+
+    const ajouterPhoto = document.querySelector('.btn-ajouter-modal')
+    ajouterPhoto.addEventListener('click', function(e) {
+        e.preventDefault()
+        modalContent.style.display = 'none'
+        ajouterPhoto.style.display='block'
+    })
+})
 // Pour ouvrir la modale 
 
 function ouvrirModalAfficherTraveaux() {
@@ -133,7 +153,26 @@ document.addEventListener('DOMContentLoaded', function(){
         const formAjoutPhoto = document.querySelector('#modal2')
         const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
 
-        
+        document.getElementById('btnAjouterPhoto').addEventListener('click', function(){
+            document.getElementById('imageFile').click()
+        })
+
+        document.getElementById('imageFile').addEventListener('change', function(event) {
+            const file = event.target.file
+            if (file && file.lenght > 0) {
+                const file = files[0]
+                const reader = new FileReader()
+                reader.onload = function(e) {
+                    const previewImage = document.getElementById('previewImage')
+                    previewImage.src = e.target.result
+                    previewImage.style.display = 'block' 
+                }
+                reader.readAsDataURL(file)
+            } else {
+                console.error('Aucune image sélectionnée')
+            }
+        })
+
         btnAjoutPhoto.addEventListener('click', function () {
             modalContent.style.display = 'none'
             formAjoutPhoto.style.display = 'flex'
@@ -196,26 +235,6 @@ document.addEventListener('DOMContentLoaded', function(){
 //     })
 // })
 
-// Pour fermer la modale
-document.addEventListener('DOMContentLoaded', function() {
-    const closeModal = document.querySelectorAll('#closeModalIcon')
-    const modal = document.querySelector('#modal')
-    const modalContent = document.querySelector('#modalContent')
-
-    closeModal.forEach(button =>{
-        button.addEventListener('click', function(e){
-            e.preventDefault()
-            modal.style.display= 'none'
-        })
-    })
-
-    const ajouterPhoto = document.querySelector('.btn-ajouter-modal')
-    ajouterPhoto.addEventListener('click', function(e) {
-        e.preventDefault()
-        modalContent.style.display = 'none'
-        ajouterPhoto.style.display='block'
-    })
-})
 
 async function callApi(endpoint, method, body) {
     const Response = await fetch(endpoint, {

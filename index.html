@@ -37,13 +37,17 @@
 			<form id="ajouterPhoto" class="formulaire-photo">
 				<div class="fond-bleu">
 					<i class="fa-regular fa-image"></i>
-					<button class="btn-ajout-photo" type="file" id="imageFile" for="imageFile" accept="image/*" required>+ Ajouter photo</button>
+					<button class="btn-ajout-photo" id="btnAjouterPhoto">+ Ajouter photo</button>
+					<input type="file" id="imageFile" accept="image/*" style="display: none;" required>
+					<img id="previewImage" src="#" alt="Preview" style="display: none; max-width: 100%;"/>
+					<p class="txt-info">jpg, png: 4mo max</p>
+					<!-- <button class="btn-ajout-photo" type="file" id="imageFile" for="imageFile" accept="image/*" required>+ Ajouter photo</button> -->
 					<!-- <input type="file" id="imageFile" name="imageFile" accept="image/*" required> -->
 				</div>
 				<label for="imageTitle">Titre</label>
 				<input type="text" id="imageTitle" name="imageTitle" required class="input-txt">
 				<label>Catégorie</label>
-				<select id="categorie" class="liste-categ">
+				<select id="categorie" class="liste-categ" required>
 					<option> </option>
 					<option value="1">Objets</option>
 					<option value="2">Appartements</option>

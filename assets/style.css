@@ -279,6 +279,10 @@ footer{
     justify-content: center;
     gap: 10px;
 	margin-top: 10px;
+	width: 100px;
+    position: absolute;
+    bottom: 325px;
+    left: 610px;
 }
 
 .projet-modifier .modifier {
@@ -421,6 +425,7 @@ footer{
 	margin-top: 10px;
 	box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
 	border: none;
+	justify-self: center;
 }
 
 .liste-categ {
@@ -448,7 +453,7 @@ footer{
 .fond-bleu {
 	background-color: #E8F1F6;
     width: 420px;
-    height: 169px;
+    height: 200px;
     border-radius: 3px;
     align-content: center;
     justify-self: center;
@@ -461,7 +466,7 @@ footer{
 	color: #b9c6cc;
 	position: relative;
     left: 140px;
-    bottom: 15px;
+    bottom: 40px;
 }
 
 .btn-ajout-photo {
@@ -474,5 +479,11 @@ footer{
     font-family: "Work Sans";
     font-size: 14px;
 	position: relative;
-    top: 28px;
+    top: 15px;
+}
+
+.txt-info {
+	position: relative;
+    top: 30px;
+    left: 130px;
 }
