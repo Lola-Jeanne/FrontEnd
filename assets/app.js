@@ -71,7 +71,7 @@ function afficheTravauxModal(works) {
         img.src = work.imageUrl
         img.style.width = "80px"
         img.style.height = "105px"
-        img.setAttribute('data-id', work.id)
+        img.setAttribute('dataId', work.id)
         figure.appendChild(img)
 
         // test logo 
@@ -89,16 +89,18 @@ function afficheTravauxModal(works) {
 document.addEventListener('DOMContentLoaded', function() {
     const closeModal = document.querySelectorAll('#closeModalIcon')
     const modal = document.querySelector('#modal')
+    const modales = document.querySelector('#modal2')
     const modalContent = document.querySelector('#modalContent')
 
     closeModal.forEach(button =>{
         button.addEventListener('click', function(e){
             e.preventDefault()
             modal.style.display= 'none'
+            modales.style.display= 'none'
         })
     })
 
-    const ajouterPhoto = document.querySelector('.btn-ajouter-modal')
+    const ajouterPhoto = document.querySelector('.btn-ajout-photo')
     ajouterPhoto.addEventListener('click', function(e) {
         e.preventDefault()
         modalContent.style.display = 'none'
@@ -115,7 +117,6 @@ function ouvrirModalAfficherTraveaux() {
     modal.style.display = 'flex'
     modal.setAttribute('aria-hidden', 'false')
     modal.setAttribute('aria-modal', 'true')
-    afficheTravauxModal(globalWorks)
 }
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -235,6 +236,7 @@ document.addEventListener('DOMContentLoaded', function(){
 //     })
 // })
 
+})
 
 async function callApi(endpoint, method, body) {
     const Response = await fetch(endpoint, {
@@ -249,7 +251,6 @@ async function callApi(endpoint, method, body) {
 }
 
 
-})
 
 // Pour supprimer une image 
  async function supprimerImage(imageId, figureElement) {
@@ -259,6 +260,7 @@ async function callApi(endpoint, method, body) {
             
             // supprimer l'image de la galerie
             const galleryPhoto = document.querySelector(`.gallery img[dataId='${imageId}']`)
+            console.log('Element récupéré')
             if (galleryPhoto) {
                 galleryPhoto.closest('figure').remove()
             }

@@ -9,6 +9,7 @@ function afficheTravaux(listeTravaux){
         const img = document.createElement("img")
         figure.appendChild(img)
         img.src = work.imageUrl
+        img.setAttribute('dataId', work.id)
 
         const figcaption = document.createElement("figcaption")
         figure.appendChild(figcaption)
@@ -27,6 +28,9 @@ async function travaux() {
     globalWorks = works
 
     afficheTravaux(works)
+
+    // remplir le contenu de la modale avant de l'ouvrir
+    afficheTravauxModal(works)
 
     const filtreObjet = document.querySelector("#filtre-objets")
     filtreObjet.addEventListener("click", function(){
