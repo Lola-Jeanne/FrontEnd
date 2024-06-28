@@ -85,6 +85,8 @@ function afficheTravauxModal(works) {
 }
 
 
+
+
 // Pour fermer la modale
 document.addEventListener('DOMContentLoaded', function() {
     const closeModal = document.querySelectorAll('#closeModalIcon')
@@ -154,19 +156,41 @@ document.addEventListener('DOMContentLoaded', function(){
         const formAjoutPhoto = document.querySelector('#modal2')
         const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
 
+        // Pour retourner à la modale précédente
+        document.addEventListener('DOMContentLoaded', function() {
+        const btnRetour = document.querySelector('#btnRetour')
+        
+        btnRetour.addEventListener('click', function(e) {
+        e.preventDefault()
+        formAjoutPhoto.style.display = 'none'
+        modalContent.style.display ='flex'
+    })
+})
+
         document.getElementById('btnAjouterPhoto').addEventListener('click', function(){
             document.getElementById('imageFile').click()
         })
 
         document.getElementById('imageFile').addEventListener('change', function(event) {
-            const file = event.target.file
-            if (file && file.lenght > 0) {
+            const files = event.target.files
+            if (files && files.length > 0) {
                 const file = files[0]
                 const reader = new FileReader()
                 reader.onload = function(e) {
                     const previewImage = document.getElementById('previewImage')
+                    const logoImage = document.getElementById('Logoimage')
+                    const txtImg = document.getElementById('btnAjouterPhoto')
+                    const infoImg = document.getElementById('infoImage')
+                    const fondImg = document.getElementById('fondImage')
+
+                    logoImage.style.display ='none'
+                    txtImg.style.display = 'none'
+                    infoImg.style.display = 'none'
+                    fondImg.style.textAlign = '-webkit-center'
                     previewImage.src = e.target.result
-                    previewImage.style.display = 'block' 
+                    previewImage.style.display = 'flex'
+                    previewImage.style.width ='129px'
+                    previewImage.style.height ='193px'
                 }
                 reader.readAsDataURL(file)
             } else {
@@ -183,11 +207,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
         // Envoyer le formulaire
-        btnSubmit.addEventListener('submit', function (e) {
+        btnSubmit.addEventListener('click', function (e) {
             e.preventDefault()
 
                 const titre = document.querySelector('#titre').value 
-                const image = document.querySelector('#image').files[0]
+                const image = document.querySelector('#imageFile').files[0]
                 const categorie = document.querySelector('#categorie').value
 
                 if (!titre || !image) {
@@ -196,8 +220,9 @@ document.addEventListener('DOMContentLoaded', function(){
                 }
 
                 const formData = new FormData ()
-                formData.append('titre', titre)
                 formData.append('image', image)
+                formData.append('titre', titre)
+                formData.append('categorie', categorie)
 
                 callApi(`http://localhost:5678/api/works`, 'POST', formData)
                 .then(Response => {
