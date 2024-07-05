@@ -150,7 +150,7 @@ document.addEventListener('DOMContentLoaded', function(){
         e.stopPropagation()
     })
 
-    // Test ajout photo
+    // ajout photo
 
     
         const formAjoutPhoto = document.querySelector('#modal2')
@@ -204,6 +204,36 @@ document.addEventListener('DOMContentLoaded', function(){
         })
 
         const btnSubmit = document.querySelector('#AjoutPhotoSubmit')
+        const form = document.getElementById('ajouterPhoto')
+        const inputs = form.querySelectorAll('input[required]')
+        // Coloration du bouton
+
+        function checkForm() {
+            let allFilled = true
+            inputs.forEach((inputs) =>{
+                if (inputs.value === '' ) {
+                    allFilled = false
+                }
+            })
+            if (allFilled) {
+                btnSubmit.classList.remove('btn-photo-disabled')
+                btnSubmit.classList.add('btn-photo-enabled')
+                btnSubmit.disabled = false
+            } else {
+                btnSubmit.classList.remove('btn-photo-enabled')
+                btnSubmit.classList.add('btn-photo-disabled')
+                btnSubmit.disabled = true
+            }
+        }
+        
+        inputs.forEach((input) => {
+            input.addEventListener('input', checkForm)
+        })
+
+        checkForm()
+
+        form.reset()
+        document.querySelector("#previewImage").style.backgroundImage = ""
 
 
         // Envoyer le formulaire
@@ -221,8 +251,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
                 const formData = new FormData ()
                 formData.append('image', image)
-                formData.append('titre', titre)
-                formData.append('categorie', categorie)
+                formData.append('title', titre)
+                formData.append('category', categorie)
 
                 const Response = await fetch (`http://localhost:5678/api/works`, {
                 method: 'POST',
@@ -241,6 +271,13 @@ document.addEventListener('DOMContentLoaded', function(){
                     } else {
                         console.log("Erreur, impossible d'ajouter la photo")
                     }
+
+             // ajouter l'image dans galerie
+            const galleryPhoto = document.querySelector(`.gallery img`)
+            console.log('Element récupéré')
+            if (galleryPhoto) {
+                galleryPhoto.closest('figure').remove()
+            }
             })
 
 //     formAjoutPhoto.addEventListener('submit', function(e) {

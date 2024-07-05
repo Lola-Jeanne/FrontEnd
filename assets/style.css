@@ -365,28 +365,22 @@ footer{
 }
 
 .btn-ajout-modal{
-	/* font-family: 'Syne';
-    font-weight: 700;
-    color: white;
-    background-color: #1D6154; */
-    /* width: 237px; */
-	height: 36px;
-    /* text-align: center;
-    border-radius: 60px; */
-	display: flex;
-	align-items: center;
+	width: 237px; 
+    height: 36px;
+    display: flex;
+    align-items: center;
     justify-content: center;
-	cursor: pointer;
-	position: fixed;
-    top: 300px;
-	border: none;
-	right: 450px;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    top: 250px;
+    left: 555px;
 } 
 
 .modal-close{
-	position: fixed;
-	right: 270px;
-	top: 110px;
+	position: relative;
+    bottom: 330px;
+    left: 750px;
 	/* à rajouter sur le bouton de login et le mode édition: */
     cursor: pointer;
     width: 30px;
@@ -444,7 +438,7 @@ footer{
     margin-top: 10px;
     margin-bottom: 100px;
 }
-.btn-photo {
+.btn-photo-enabled {
 	font-family: 'Syne';
     font-weight: 700;
     color: white;
@@ -456,6 +450,20 @@ footer{
     width: 237px;
     height: 36px;
 	cursor: pointer;
+}
+
+.btn-photo-disabled {
+	font-family: 'Syne';
+    font-weight: 700;
+    color: white;
+    background-color: #A7A7A7;
+    margin: 2em auto;
+    text-align: center;
+    border-radius: 60px;
+    border: none;
+    width: 237px;
+    height: 36px;
+    cursor: pointer;
 }
 
 .fond-bleu {
