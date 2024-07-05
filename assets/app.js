@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const closeModal = document.querySelectorAll('#closeModalIcon')
     const modal = document.querySelector('#modal')
     const modales = document.querySelector('#modal2')
-    const modalContent = document.querySelector('#modalContent')
+    // const modalContent = document.querySelector('#modalContent')
 
     closeModal.forEach(button =>{
         button.addEventListener('click', function(e){
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const ajouterPhoto = document.querySelector('.btn-ajout-photo')
     ajouterPhoto.addEventListener('click', function(e) {
         e.preventDefault()
-        modalContent.style.display = 'none'
+        // modalContent.style.display = 'none'
         ajouterPhoto.style.display='block'
     })
 })
@@ -207,7 +207,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
         // Envoyer le formulaire
-        btnSubmit.addEventListener('click', function (e) {
+        btnSubmit.addEventListener('click',  async function (e) {
             e.preventDefault()
 
                 const titre = document.querySelector('#titre').value 
@@ -224,8 +224,13 @@ document.addEventListener('DOMContentLoaded', function(){
                 formData.append('titre', titre)
                 formData.append('categorie', categorie)
 
-                callApi(`http://localhost:5678/api/works`, 'POST', formData)
-                .then(Response => {
+                const Response = await fetch (`http://localhost:5678/api/works`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+                  },
+                body: formData
+            })
                     if (Response.ok) {
                         console.log("Photo ajoutée")
                         formAjoutPhoto.reset()
@@ -236,10 +241,6 @@ document.addEventListener('DOMContentLoaded', function(){
                     } else {
                         console.log("Erreur, impossible d'ajouter la photo")
                     }
-                })
-                .catch(error => {
-                    console.log("Erreur: ", error)
-                })
             })
 
 //     formAjoutPhoto.addEventListener('submit', function(e) {

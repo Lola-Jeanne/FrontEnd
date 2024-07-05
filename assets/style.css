@@ -514,3 +514,10 @@ footer{
     top: 30px;
     left: 130px;
 }
+
+.btn-modifier-mes-projets {
+	background-color: white;
+    border: none;
+    cursor: pointer;
+    height: 0px;
+}
