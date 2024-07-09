@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function ouvrirModalAfficherTraveaux() {
     const modal = document.querySelector('#modal')
+    const modalContent = modal.querySelector('.modal-content')
     // const modalContent = document.querySelector('.modal-content')
     // const ajouterPhoto = document.getElementById('ajouterPhoto')
 
@@ -122,11 +123,11 @@ function ouvrirModalAfficherTraveaux() {
 }
 
 document.addEventListener('DOMContentLoaded', function(){
-    const openModal = document.querySelectorAll('.txt-edition')
+    const openModal = document.querySelectorAll('.txt-edition', '.btn-modifier-mes-projets')
 
     const modal = document.querySelector('#modal')
     const modalContent = modal.querySelector('.modal-content')
-    const ajouterPhoto = document.getElementById('ajouterPhoto')
+    // const ajouterPhoto = document.getElementById('ajouterPhoto')
 
     openModal.forEach(button => {
         button.addEventListener('click', function(e){
@@ -158,10 +159,11 @@ document.addEventListener('DOMContentLoaded', function(){
 
         // Pour retourner à la modale précédente
         document.addEventListener('DOMContentLoaded', function() {
-        const btnRetour = document.querySelector('#btnRetour')
+        const btnRetour = document.getElementById('btnRetour')
         
-        btnRetour.addEventListener('click', function(e) {
-        e.preventDefault()
+        btnRetour.addEventListener('click', () => {
+        // e.preventDefault()
+        window.history.back()
         formAjoutPhoto.style.display = 'none'
         modalContent.style.display ='flex'
     })

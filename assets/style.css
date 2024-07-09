@@ -342,6 +342,8 @@ footer{
 	display: flex;
 	flex-wrap: wrap;
 	gap: 5px;
+	justify-content: center;
+	align-content: center;
 }
 
 .modal-content figure {
@@ -433,7 +435,6 @@ footer{
 .liste-categ {
 	border: none;
     box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
-    width: 630px;
     height: 50px;
     margin-top: 10px;
     margin-bottom: 100px;
@@ -496,12 +497,13 @@ footer{
 }
 
 .btn-retour{
-	position: absolute;
-    top: 130px;
-    left: 450px;
+	position: relative;
+    bottom: 470px;
+    right: 200px;
     border: none;
     background: white;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .btn-ajout-photo {
