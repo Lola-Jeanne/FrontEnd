@@ -113,6 +113,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function ouvrirModalAfficherTraveaux() {
     const modal = document.querySelector('#modal')
+    const modalProjet = document.querySelector('#btn-modifier-projet')
     const modalContent = modal.querySelector('.modal-content')
     // const modalContent = document.querySelector('.modal-content')
     // const ajouterPhoto = document.getElementById('ajouterPhoto')
@@ -120,12 +121,17 @@ function ouvrirModalAfficherTraveaux() {
     modal.style.display = 'flex'
     modal.setAttribute('aria-hidden', 'false')
     modal.setAttribute('aria-modal', 'true')
+
+    modalProjet.style.display = 'flex'
+    modalProjet.setAttribute('aria-hidden', 'false')
+    modalProjet.setAttribute('aria-modal', 'true')
 }
 
 document.addEventListener('DOMContentLoaded', function(){
     const openModal = document.querySelectorAll('.txt-edition', '.btn-modifier-mes-projets')
 
     const modal = document.querySelector('#modal')
+    const modalProjet = document.querySelector('#btn-modifier-projet')
     const modalContent = modal.querySelector('.modal-content')
     // const ajouterPhoto = document.getElementById('ajouterPhoto')
 
@@ -147,10 +153,19 @@ document.addEventListener('DOMContentLoaded', function(){
         }
     })
 
+    modalProjet.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modalProjet.style.display = 'none'
+            modalProjet.setAttribute('aria-hidden', 'true')
+            modalProjet.setAttribute('aria-modal', 'true')
+        }
+    })
+
     modalContent.addEventListener('click', function(e) {
         e.stopPropagation()
     })
 
+    
     // ajout photo
 
     
