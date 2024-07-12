@@ -74,7 +74,7 @@ function afficheTravauxModal(works) {
         img.setAttribute('dataId', work.id)
         figure.appendChild(img)
 
-        // test logo 
+        // logo trash
 
         const trashLogo = document.createElement("button")
         trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
@@ -177,10 +177,9 @@ document.addEventListener('DOMContentLoaded', function(){
         const btnRetour = document.getElementById('btnRetour')
         
         btnRetour.addEventListener('click', () => {
-        // e.preventDefault()
-        window.history.back()
+        // masquer la deuxième modale et affichier la première
         formAjoutPhoto.style.display = 'none'
-        modalContent.style.display ='flex'
+        modal.style.display ='flex'
     })
 })
 
@@ -272,22 +271,40 @@ document.addEventListener('DOMContentLoaded', function(){
                 formData.append('category', categorie)
 
                 const Response = await fetch (`http://localhost:5678/api/works`, {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem("token")}`,
-                  },
-                body: formData
-            })
-                    if (Response.ok) {
-                        console.log("Photo ajoutée")
-                        formAjoutPhoto.reset()
-                        formAjoutPhoto.style.display= 'none'
-                        modalContent.style.display= 'block'
+                    method: 'POST',
+                    headers: {
+                        Authorization: `Bearer ${window.localStorage.getItem("token")}`,
+                    },
+                    body: formData
+                })
+                if (Response.ok) {
+                    const formAjoutPhoto = document.querySelector('#modal2')
+                    const projets = document.querySelector(".gallery")
+    
+                    console.log("Photo ajoutée")
+                    // formAjoutPhoto.reset()
+                    formAjoutPhoto.style.display= 'none'
+                    const data = await Response.json()
+                    console.log(data)
+                    modalContent.style.display= 'block'
+                    
+                    const figure = document.createElement("figure")
+                    projets.appendChild(figure)
+            
+                    const img = document.createElement("img")
+                    figure.appendChild(img)
+                    img.src = data.imageUrl
+                    img.setAttribute('dataId', data.id)
+            
+                    const figcaption = document.createElement("figcaption")
+                    figure.appendChild(figcaption)
+                    figcaption.innerHTML = data.title
 
-                        ouvrirModalAfficherTraveaux()
+                    ouvrirModalAfficherTraveaux()
+
                     } else {
-                        console.log("Erreur, impossible d'ajouter la photo")
-                    }
+                    console.log("Erreur, impossible d'ajouter la photo")
+                }
 
              // ajouter l'image dans galerie
             const galleryPhoto = document.querySelector(`.gallery img`)
