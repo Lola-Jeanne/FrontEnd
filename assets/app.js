@@ -209,6 +209,8 @@ document.addEventListener('DOMContentLoaded', function(){
                     previewImage.style.height ='193px'
                 }
                 reader.readAsDataURL(file)
+                // form.reset();
+                // document.querySelector("#fondImage").style.backgroundImage = "";
             } else {
                 console.error('Aucune image sélectionnée')
             }
