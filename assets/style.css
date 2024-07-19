@@ -330,20 +330,21 @@ footer{
 }
 
 .modal-content {
-	background: white;
+	/* background: white; */
 	padding: 20px;
 	border-radius: 10px;
-	width: 630px;
-	height: 688px;
+	width: 100%;
+	/* height: 688px; */
 	/* width: auto;
 	height: auto; */
-	padding: 20px;
-	border-radius: 10px;
+	/* padding: 20px; */
+	/* border-radius: 10px; */
 	display: flex;
 	flex-wrap: wrap;
 	gap: 5px;
 	justify-content: center;
-	align-content: center;
+	align-content: flex-start;
+	align-self: center;
 }
 
 .modal-content figure {
@@ -360,9 +361,9 @@ footer{
     font-size: 26px;
     font-weight: 400;
     line-height: normal;
-	position: relative;
+	/* position: relative;
     bottom: 330px;
-    left: 410px;
+    left: 410px; */
 	padding-top: 30px;
 }
 
@@ -374,15 +375,15 @@ footer{
     justify-content: center;
     cursor: pointer;
     border: none;
-    position: relative;
+    /* position: relative;
     top: 250px;
-    left: 555px;
+    left: 555px; */
 } 
 
 .modal-close{
-	position: relative;
+	/* position: relative;
     bottom: 330px;
-    left: 750px;
+    left: 750px; */
 	/* à rajouter sur le bouton de login et le mode édition: */
     cursor: pointer;
     width: 30px;
@@ -390,6 +391,9 @@ footer{
     background-color: white;
 	padding: 0px;
 	border: none;
+	position: relative;
+    left: 570px;
+    top: 15px;
 }
 
 .modal-close-icone {
@@ -530,4 +534,16 @@ footer{
     border: none;
     cursor: pointer;
     height: 0px;
+}
+
+.fond-modale {
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	width: 630px;
+	height: 688px;
+	padding: 20px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
 }
