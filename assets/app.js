@@ -125,6 +125,8 @@ function ouvrirModalAfficherTraveaux() {
     modalProjet.style.display = 'flex'
     modalProjet.setAttribute('aria-hidden', 'false')
     modalProjet.setAttribute('aria-modal', 'true')
+
+    modalContent.style.display = 'flex'
 }
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -170,18 +172,36 @@ document.addEventListener('DOMContentLoaded', function(){
 
     
         const formAjoutPhoto = document.querySelector('#modal2')
+        const fondModale = document.querySelector('.fond-modale')
         const btnAjoutPhoto = document.querySelector('.btn-ajout-modal')
+        // const BackgroundModal = document.styleSheets[1];
+
+
+        btnAjoutPhoto.addEventListener('click', function() {
+            fondModale.style.display = 'none'
+            // modalContent.style.backgroundColor = "white"
+            // BackgroundModal.cssRules[0].style.backgroundColor = "white";
+
+        })
 
         // Pour retourner à la modale précédente
         document.addEventListener('DOMContentLoaded', function() {
-        const btnRetour = document.getElementById('btnRetour')
-        
-        btnRetour.addEventListener('click', () => {
-        // masquer la deuxième modale et affichier la première
-        formAjoutPhoto.style.display = 'none'
-        modal.style.display ='flex'
-    })
-})
+            const btnRetour = document.getElementById('btnRetour')
+            
+            btnRetour.addEventListener('click', function() {
+                // masquer la deuxième modale et affichier la première
+                formAjoutPhoto.style.display = 'none'
+                modal.style.display ='flex'
+                
+                // closeModal.forEach(button =>{
+                //     button.addEventListener('click', function(e){
+                //         e.preventDefault()
+                //         modal.style.display= 'none'
+                //         modales.style.display= 'none'
+                //     })
+                // })
+            })
+        })
 
         document.getElementById('btnAjouterPhoto').addEventListener('click', function(){
             document.getElementById('imageFile').click()
@@ -301,6 +321,27 @@ document.addEventListener('DOMContentLoaded', function(){
                     const figcaption = document.createElement("figcaption")
                     figure.appendChild(figcaption)
                     figcaption.innerHTML = data.title
+
+                    const figure2 = document.createElement("figure")
+                    modalContent.appendChild(figure2)
+                    // test logo
+                    // modalContent.appendChild(figure)
+
+                    const img2 = document.createElement("img")
+                    // figure.appendChild(img)
+                    img2.src = data.imageUrl
+                    img2.style.width = "80px"
+                    img2.style.height = "105px"
+                    img2.setAttribute('dataId', data.id)
+                    figure2.appendChild(img)
+
+                    // logo trash
+
+                    const trashLogo = document.createElement("button")
+                    trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
+                    trashLogo.classList.add('trashLogo')
+                    trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
+                    figure.appendChild(trashLogo)
 
                     ouvrirModalAfficherTraveaux()
 
