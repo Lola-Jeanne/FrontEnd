@@ -347,6 +347,25 @@ footer{
 	align-self: center;
 }
 
+.modal-content-deux {
+	position: fixed;
+    width: 630px;
+    height: 688px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    /* width: 100%; */
+    /* height: 688px; */
+    /* padding: 20px; */
+    /* border-radius: 10px; */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    align-content: flex-start;
+    align-self: center;
+}
+
 .modal-content figure {
 	width: 80px;
     height: 105px;
@@ -364,7 +383,23 @@ footer{
 	/* position: relative;
     bottom: 330px;
     left: 410px; */
-	padding-top: 30px;
+	/* padding-top: 30px; */
+	/* width: 150px;
+    height: 30px; */
+}
+
+.modal-txt-deux{
+	color: #000;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 400;
+    line-height: normal;
+	/* position: relative;
+    bottom: 330px;
+    left: 410px; */
+	/* padding-top: 30px; */
+	width: 150px;
+    height: 30px;
 }
 
 .btn-ajout-modal{
@@ -396,6 +431,22 @@ footer{
     top: 15px;
 }
 
+.modal-close-deux {
+	/* position: relative;
+    bottom: 330px;
+    left: 750px; */
+	/* à rajouter sur le bouton de login et le mode édition: */
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-color: white;
+	padding: 0px;
+	border: none;
+	position: absolute;
+    left: 600px;
+    top: 15px;
+}
+
 .modal-close-icone {
 	width: 20px;
 	height: 20px;
@@ -424,6 +475,7 @@ footer{
 .formulaire-photo {
 	align-self: center;
     display: inline-grid;
+	position: absolute;
 }
 
 .input-txt {
@@ -492,9 +544,10 @@ footer{
 }
 
 .fa-arrow-left {
-	position: absolute;
-    top: 130px;
-    left: 450px;
+	color: #000000;
+    position: fixed;
+    left: 200px;
+    top: 105px;
     border: none;
     background: white;
     font-size: 20px;

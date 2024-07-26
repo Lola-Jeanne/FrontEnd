@@ -88,27 +88,31 @@ function afficheTravauxModal(works) {
 
 
 // Pour fermer la modale
-document.addEventListener('DOMContentLoaded', function() {
-    const closeModal = document.querySelectorAll('#closeModalIcon')
-    const modal = document.querySelector('#modal')
-    const modales = document.querySelector('#modal2')
-    // const modalContent = document.querySelector('#modalContent')
+// document.addEventListener('DOMContentLoaded', function() {
+const closeModal = document.querySelector('#closeModalIcon')
+const closeModalDeux = document.querySelector('#closeModalIcon-deux')
+const modal = document.querySelector('#modal')
+const modales = document.querySelector('#modal2')
+// const modalContent = document.querySelector('#modalContent')
 
-    closeModal.forEach(button =>{
-        button.addEventListener('click', function(e){
-            e.preventDefault()
-            modal.style.display= 'none'
-            modales.style.display= 'none'
-        })
-    })
 
-    const ajouterPhoto = document.querySelector('.btn-ajout-photo')
-    ajouterPhoto.addEventListener('click', function(e) {
+    closeModal.addEventListener('click', function(e){
         e.preventDefault()
-        // modalContent.style.display = 'none'
-        ajouterPhoto.style.display='block'
+        modal.style.display= 'none'
     })
+
+    closeModalDeux.addEventListener('click', function(e){
+        e.preventDefault()
+        modales.style.display= 'none'
+    })
+
+const ajouterPhoto = document.querySelector('.btn-ajout-photo')
+ajouterPhoto.addEventListener('click', function(e) {
+    e.preventDefault()
+    // modalContent.style.display = 'none'
+    ajouterPhoto.style.display='block'
 })
+// })
 // Pour ouvrir la modale 
 
 function ouvrirModalAfficherTraveaux() {
@@ -185,22 +189,24 @@ document.addEventListener('DOMContentLoaded', function(){
         })
 
         // Pour retourner à la modale précédente
-        document.addEventListener('DOMContentLoaded', function() {
-            const btnRetour = document.getElementById('btnRetour')
-            
+        const btnRetour = document.getElementById('btnRetour')
+            console.log(btnRetour)
+        
             btnRetour.addEventListener('click', function() {
-                // masquer la deuxième modale et affichier la première
-                formAjoutPhoto.style.display = 'none'
-                modal.style.display ='flex'
-                
-                // closeModal.forEach(button =>{
-                //     button.addEventListener('click', function(e){
-                //         e.preventDefault()
-                //         modal.style.display= 'none'
-                //         modales.style.display= 'none'
-                //     })
-                // })
-            })
+            console.log('fonction ok')
+            // masquer la deuxième modale et affichier la première
+            formAjoutPhoto.style.display = 'none'
+            modal.style.display ='flex'
+            fondModale.style.display = 'flex'
+            modalContent.style.display = 'flex'
+            
+            // closeModal.forEach(button =>{
+            //     button.addEventListener('click', function(e){
+            //         e.preventDefault()
+            //         modal.style.display= 'none'
+            //         modales.style.display= 'none'
+            //     })
+            // })
         })
 
         document.getElementById('btnAjouterPhoto').addEventListener('click', function(){
