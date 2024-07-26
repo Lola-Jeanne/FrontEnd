@@ -93,17 +93,21 @@ const closeModal = document.querySelector('#closeModalIcon')
 const closeModalDeux = document.querySelector('#closeModalIcon-deux')
 const modal = document.querySelector('#modal')
 const modales = document.querySelector('#modal2')
+// const fondModale = document.querySelector('.fond-modale')
 // const modalContent = document.querySelector('#modalContent')
 
 
     closeModal.addEventListener('click', function(e){
         e.preventDefault()
         modal.style.display= 'none'
+        // fondModale.style.display = 'none'
     })
 
     closeModalDeux.addEventListener('click', function(e){
         e.preventDefault()
         modales.style.display= 'none'
+        modal.style.display='none'
+        // fondModale.style.display = 'none'
     })
 
 const ajouterPhoto = document.querySelector('.btn-ajout-photo')
@@ -119,6 +123,7 @@ function ouvrirModalAfficherTraveaux() {
     const modal = document.querySelector('#modal')
     const modalProjet = document.querySelector('#btn-modifier-projet')
     const modalContent = modal.querySelector('.modal-content')
+    const fondModale = document.querySelector('.fond-modale')
     // const modalContent = document.querySelector('.modal-content')
     // const ajouterPhoto = document.getElementById('ajouterPhoto')
 
@@ -131,6 +136,8 @@ function ouvrirModalAfficherTraveaux() {
     modalProjet.setAttribute('aria-modal', 'true')
 
     modalContent.style.display = 'flex'
+
+    fondModale.style.display = 'flex'
 }
 
 document.addEventListener('DOMContentLoaded', function(){
