@@ -254,6 +254,10 @@ footer{
     display: flex;
 }
 
+.login-name {
+	visibility: hidden;
+}
+
 .mode-edition {
 	margin: 0px;
 	width: 100%;
@@ -283,14 +287,9 @@ footer{
 
 .projet-modifier{
 	display: flex;
-	/* align-items: center; */
     justify-content: center;
     gap: 10px;
 	margin-top: 10px;
-	/* width: 100px; */
-    /* position: absolute;
-    bottom: 325px;
-    left: 610px; */
 }
 
 .projet-modifier .modifier {
@@ -330,15 +329,9 @@ footer{
 }
 
 .modal-content {
-	/* background: white; */
 	padding: 20px;
 	border-radius: 10px;
 	width: 100%;
-	/* height: 688px; */
-	/* width: auto;
-	height: auto; */
-	/* padding: 20px; */
-	/* border-radius: 10px; */
 	display: flex;
 	flex-wrap: wrap;
 	gap: 5px;
@@ -354,10 +347,6 @@ footer{
     background: white;
     padding: 20px;
     border-radius: 10px;
-    /* width: 100%; */
-    /* height: 688px; */
-    /* padding: 20px; */
-    /* border-radius: 10px; */
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
@@ -380,12 +369,6 @@ footer{
     font-size: 26px;
     font-weight: 400;
     line-height: normal;
-	/* position: relative;
-    bottom: 330px;
-    left: 410px; */
-	/* padding-top: 30px; */
-	/* width: 150px;
-    height: 30px; */
 }
 
 .modal-txt-deux{
@@ -394,10 +377,6 @@ footer{
     font-size: 26px;
     font-weight: 400;
     line-height: normal;
-	/* position: relative;
-    bottom: 330px;
-    left: 410px; */
-	/* padding-top: 30px; */
 	width: 150px;
     height: 30px;
 }
@@ -410,16 +389,9 @@ footer{
     justify-content: center;
     cursor: pointer;
     border: none;
-    /* position: relative;
-    top: 250px;
-    left: 555px; */
 } 
 
 .modal-close{
-	/* position: relative;
-    bottom: 330px;
-    left: 750px; */
-	/* à rajouter sur le bouton de login et le mode édition: */
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -432,10 +404,6 @@ footer{
 }
 
 .modal-close-deux {
-	/* position: relative;
-    bottom: 330px;
-    left: 750px; */
-	/* à rajouter sur le bouton de login et le mode édition: */
     cursor: pointer;
     width: 30px;
     height: 30px;
@@ -495,6 +463,7 @@ footer{
     margin-top: 10px;
     margin-bottom: 100px;
 }
+
 .btn-photo-enabled {
 	font-family: 'Syne';
     font-weight: 700;
@@ -532,7 +501,6 @@ footer{
     justify-self: center;
     margin-top: 30px;
     margin-bottom: 30px;
-	/* text-align: -webkit-center; */
 }
 
 .fa-image{
@@ -551,6 +519,7 @@ footer{
     border: none;
     background: white;
     font-size: 20px;
+	cursor: pointer;
 }
 
 .btn-retour{
@@ -587,6 +556,7 @@ footer{
     border: none;
     cursor: pointer;
     height: 0px;
+	display: flex;
 }
 
 .fond-modale {
