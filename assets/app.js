@@ -46,6 +46,13 @@ const modales = document.querySelector('#modal2')
         modal.style.display='none'
     })
 
+    window.onclick = function(e) {
+        if (event.target == modales) {
+            modales.style.display= 'none'
+            modal.style.display='none'
+        }
+    }
+
 const ajouterPhoto = document.querySelector('.btn-ajout-photo')
 ajouterPhoto.addEventListener('click', function(e) {
     e.preventDefault()
