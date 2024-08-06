@@ -262,13 +262,15 @@ document.addEventListener('DOMContentLoaded', function(){
                     const figure2 = document.createElement("figure")
                     modalContent.appendChild(figure2)
 
+
                     const img2 = document.createElement("img")
+                    modalContent.appendChild(img2)
             
                     img2.src = data.imageUrl
                     img2.style.width = "80px"
                     img2.style.height = "105px"
                     img2.setAttribute('dataId', data.id)
-                    figure2.appendChild(img)
+                    modalContent.appendChild(figure2)
 
                     // logo trash
 
