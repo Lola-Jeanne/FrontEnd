@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
                     const img2 = document.createElement("img")
-                    modalContent.appendChild(img2)
+                    figure2.appendChild(img2)
             
                     img2.src = data.imageUrl
                     img2.style.width = "80px"
@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
                     trashLogo.classList.add('trashLogo')
                     trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
-                    figure.appendChild(trashLogo)
+                    figure2.appendChild(trashLogo)
 
                     ouvrirModalAfficherTraveaux()
 
