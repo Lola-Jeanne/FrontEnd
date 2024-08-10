@@ -27,6 +27,5 @@ async function login(){
         document.getElementById("erreur").innerHTML= "Erreur: L'adresse e-mail ou le mot de passe est incorrect"
     }
 
-    let result = await reponse.json();
 }
 

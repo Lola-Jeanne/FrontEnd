@@ -1,4 +1,5 @@
 const modalContent = document.querySelector('#modal .modal-content')
+let work;
 
 function afficheTravauxModal(works) {
     modalContent.innerHTML = ""
@@ -277,7 +278,9 @@ document.addEventListener('DOMContentLoaded', function(){
                     const trashLogo = document.createElement("button")
                     trashLogo.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
                     trashLogo.classList.add('trashLogo')
-                    trashLogo.addEventListener('click', () => supprimerImage(work.id, figure))
+                    trashLogo.addEventListener('click', () => supprimerImage(img2, figure2))
+                    trashLogo.addEventListener('click', () => supprimerImage(work, figure))
+                    console.log(img2)
                     figure2.appendChild(trashLogo)
 
                     ouvrirModalAfficherTraveaux()
@@ -285,6 +288,7 @@ document.addEventListener('DOMContentLoaded', function(){
                     } else {
                     console.log("Erreur, impossible d'ajouter la photo")
                 }
+            
 
              // ajouter l'image dans galerie
             const galleryPhoto = document.querySelector(`.gallery img`)
